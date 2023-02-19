@@ -12,9 +12,10 @@ const Header = ({title, searchBar, showBackButton = true}: Props) => {
     const navigate = useNavigate();
 
     return (
-        <HeaderContainer>
+        <HeaderContainer data-testid="pageHeader">
             {showBackButton && (
                 <BackButton
+                    data-testid="headerBackButton"
                     onClick={() => {
                         navigate(-1);
                     }}

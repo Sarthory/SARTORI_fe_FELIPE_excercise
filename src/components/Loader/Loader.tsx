@@ -8,7 +8,7 @@ export default function Loader() {
     return (
         <>
             {isLoading && (
-                <LoaderContainer>
+                <LoaderContainer data-testid="loader">
                     <div className="loader" />
                 </LoaderContainer>
             )}

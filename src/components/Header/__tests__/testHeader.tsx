@@ -1,6 +1,7 @@
 import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import Header from '../../../components/Header/Header';
+import SearchBar from 'components/SearchBar/SearchBar';
+import Header from '../Header';
 
 const mockUseNavigate = jest.fn();
 
@@ -10,40 +11,40 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Header', () => {
-    beforeAll(() => {
-        jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-        jest.clearAllTimers();
-    });
-
-    afterAll(() => {
-        jest.useRealTimers();
-    });
-
     it('should render header', () => {
         render(<Header title="Header" />);
 
-        expect(screen.getByText('Header')).toBeInTheDocument();
+        expect(screen.getByTestId('pageHeader')).toBeInTheDocument();
+    });
+
+    it('should render header with search bar', () => {
+        render(
+            <Header
+                title="Header"
+                searchBar={<SearchBar scope="teams" setFilteredData={jest.fn()} />}
+            />
+        );
+
+        expect(screen.getByTestId('pageHeader')).toBeInTheDocument();
+        expect(screen.getByTestId('searchBar')).toBeInTheDocument();
     });
 
     it('should render back button in header', () => {
         render(<Header title="Header" showBackButton />);
 
-        expect(screen.getByRole('button')).toBeInTheDocument();
+        expect(screen.getByTestId('headerBackButton')).toBeInTheDocument();
     });
 
     it('should not render back button in header', () => {
         render(<Header title="Header" showBackButton={false} />);
 
-        expect(screen.queryByRole('button')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('headerBackButton')).not.toBeInTheDocument();
     });
 
     it('should navigate back when back button is clicked', () => {
         render(<Header title="Header" showBackButton />);
 
-        fireEvent.click(screen.getByRole('button'));
+        fireEvent.click(screen.getByTestId('headerBackButton'));
 
         expect(mockUseNavigate).toHaveBeenCalled();
     });

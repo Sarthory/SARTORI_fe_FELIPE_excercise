@@ -12,7 +12,7 @@ interface GlobalContextContract {
     setSelectedTeamData: (value: TeamOverview) => void;
 }
 
-const GlobalContext = createContext({} as GlobalContextContract);
+export const GlobalContext = createContext({} as GlobalContextContract);
 
 export default function GlobalContextProvider({children}: any) {
     const [isLoading, setIsLoading] = useState<boolean>(false);

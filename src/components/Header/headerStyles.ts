@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
     height: 100px;
     height: 60px;
     width: 100%;

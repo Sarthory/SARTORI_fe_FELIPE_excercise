@@ -5,14 +5,19 @@ import {useNavigate} from 'react-router-dom';
 import {Team} from 'types';
 import {Card} from './teamCardStyles';
 
-export default function TeamCard({id, name}: Team) {
+interface Props {
+    teamData: Team;
+}
+
+export default function TeamCard({teamData}: Props) {
+    const {id, name} = teamData;
     const {setIsLoading, setSelectedTeamData} = useGlobalContext();
     const navigate = useNavigate();
 
     const handleAcquireTeamData = async () => {
         setIsLoading(true);
-        const teamData = await teamsService.getTeamById(id, name);
-        setSelectedTeamData(teamData);
+        const team = await teamsService.getTeamById(id, name);
+        setSelectedTeamData(team);
         setIsLoading(false);
     };
 
@@ -21,7 +26,8 @@ export default function TeamCard({id, name}: Team) {
             id={id}
             title={name}
             onClick={() => {
-                handleAcquireTeamData().then(() => navigate('/teamOverview'));
+                handleAcquireTeamData();
+                navigate('/teamOverview');
             }}
         >
             <div className="legend">Name:</div>

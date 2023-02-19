@@ -14,7 +14,7 @@ const TeamsList = ({teamsList}: Props) => {
     return (
         <TeamsListContainer>
             {isLoading && <h5>Loading data...</h5>}
-            {!isLoading && teamsList?.map(team => <TeamCard key={team.id} {...team} />)}
+            {!isLoading && teamsList?.map(team => <TeamCard key={team.id} teamData={team} />)}
         </TeamsListContainer>
     );
 };

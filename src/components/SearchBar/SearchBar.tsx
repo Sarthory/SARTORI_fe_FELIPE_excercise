@@ -48,7 +48,7 @@ export default function SearchBar({scope, setFilteredData}: Props) {
     };
 
     return (
-        <SearchContainer>
+        <SearchContainer data-testid="searchBar">
             <input
                 type="search"
                 placeholder="Search by name"

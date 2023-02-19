@@ -20,6 +20,7 @@ export default function UserDeatailModal({isOpen, setIsOpen, userData}: Props) {
             {isOpen && (
                 <ModalOverlay
                     id="userModal"
+                    data-testid="userModal"
                     onClick={e => {
                         handleOverlayClose(e);
                     }}
