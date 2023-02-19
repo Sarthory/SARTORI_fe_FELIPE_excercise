@@ -7,11 +7,11 @@ export const SearchContainer = styled.div`
     border: 1px solid #ccc;
     border-radius: 50px;
     margin: 0 15px;
+    background-color: #fff;
 
     > input {
         border: none;
         outline: none;
-        background-color: white;
         margin: 4px 10px;
         height: 25px;
     }
