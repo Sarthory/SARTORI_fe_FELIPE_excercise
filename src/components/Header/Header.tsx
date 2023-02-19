@@ -1,3 +1,4 @@
+import {useGlobalContext} from 'context/GlobalContext';
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {HeaderContainer, BackButton, Title} from './headerStyles';
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const Header = ({title, searchBar, showBackButton = true}: Props) => {
+    const {isLoading} = useGlobalContext();
     const navigate = useNavigate();
 
     return (
@@ -26,7 +28,8 @@ const Header = ({title, searchBar, showBackButton = true}: Props) => {
                     </svg>
                 </BackButton>
             )}
-            <Title>{title}</Title>
+
+            <Title>{isLoading ? 'Loading data...' : title}</Title>
 
             {searchBar}
         </HeaderContainer>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {GlobalContext} from 'context/GlobalContext';
 import {fireEvent, render, screen} from '@testing-library/react';
 import SearchBar from 'components/SearchBar/SearchBar';
 import Header from '../Header';
@@ -10,19 +11,35 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockUseNavigate,
 }));
 
+const customRender = (children: JSX.Element, {value, ...renderOptions}) => {
+    return render(
+        <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>,
+        renderOptions
+    );
+};
+
 describe('Header', () => {
     it('should render header', () => {
-        render(<Header title="Header" />);
+        const value = {
+            isLoading: false,
+        };
+
+        customRender(<Header title="Header" />, {value});
 
         expect(screen.getByTestId('pageHeader')).toBeInTheDocument();
     });
 
     it('should render header with search bar', () => {
-        render(
+        const value = {
+            isLoading: false,
+        };
+
+        customRender(
             <Header
                 title="Header"
                 searchBar={<SearchBar scope="teams" setFilteredData={jest.fn()} />}
-            />
+            />,
+            {value}
         );
 
         expect(screen.getByTestId('pageHeader')).toBeInTheDocument();
@@ -30,19 +47,41 @@ describe('Header', () => {
     });
 
     it('should render back button in header', () => {
-        render(<Header title="Header" showBackButton />);
+        const value = {
+            isLoading: false,
+        };
+
+        customRender(<Header title="Header" showBackButton />, {value});
 
         expect(screen.getByTestId('headerBackButton')).toBeInTheDocument();
     });
 
     it('should not render back button in header', () => {
-        render(<Header title="Header" showBackButton={false} />);
+        const value = {
+            isLoading: false,
+        };
+
+        customRender(<Header title="Header" showBackButton={false} />, {value});
 
         expect(screen.queryByTestId('headerBackButton')).not.toBeInTheDocument();
     });
 
+    it('should show loading phrase while is loading', () => {
+        const value = {
+            isLoading: true,
+        };
+
+        customRender(<Header title="Header" showBackButton={false} />, {value});
+
+        expect(screen.getByText('Loading data...')).toBeInTheDocument();
+    });
+
     it('should navigate back when back button is clicked', () => {
-        render(<Header title="Header" showBackButton />);
+        const value = {
+            isLoading: false,
+        };
+
+        customRender(<Header title="Header" showBackButton />, {value});
 
         fireEvent.click(screen.getByTestId('headerBackButton'));
 

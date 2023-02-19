@@ -16,9 +16,11 @@ export default function TeamCard({teamData}: Props) {
 
     const handleAcquireTeamData = async () => {
         setIsLoading(true);
-        const team = await teamsService.getTeamById(id, name);
-        setSelectedTeamData(team);
-        setIsLoading(false);
+        await teamsService.getTeamById(id, name).then(team => {
+            setSelectedTeamData(team);
+            setIsLoading(false);
+            return true;
+        });
     };
 
     return (
@@ -26,8 +28,9 @@ export default function TeamCard({teamData}: Props) {
             id={id}
             title={name}
             onClick={() => {
-                handleAcquireTeamData();
-                navigate('/teamOverview');
+                if (handleAcquireTeamData()) {
+                    navigate('/teamOverview');
+                }
             }}
         >
             <div className="legend">Name:</div>
