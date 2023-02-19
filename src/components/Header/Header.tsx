@@ -5,9 +5,10 @@ import {HeaderContainer, BackButton, Title} from './headerStyles';
 interface Props {
     title: string;
     showBackButton?: boolean;
+    searchBar?: JSX.Element;
 }
 
-const Header = ({title, showBackButton = true}: Props) => {
+const Header = ({title, searchBar, showBackButton = true}: Props) => {
     const navigate = useNavigate();
 
     return (
@@ -25,6 +26,8 @@ const Header = ({title, showBackButton = true}: Props) => {
                 </BackButton>
             )}
             <Title>{title}</Title>
+
+            {searchBar}
         </HeaderContainer>
     );
 };

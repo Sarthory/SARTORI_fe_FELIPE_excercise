@@ -1,14 +1,16 @@
 import React from 'react';
-import TeamCard from 'components/TeamCard/TeamCard';
-import {useGlobalContext} from 'context/GlobalContext';
+import {Team} from 'types';
+import TeamCard from 'components/TeamsList/TeamCard/TeamCard';
 import {TeamsListContainer} from './teamsListStyles';
 
-const TeamsList = () => {
-    const {teamsList} = useGlobalContext();
+interface Props {
+    teamsList: Team[];
+}
 
+const TeamsList = ({teamsList}: Props) => {
     return (
         <TeamsListContainer>
-            {teamsList.map(team => (
+            {teamsList?.map(team => (
                 <TeamCard key={team.id} {...team} />
             ))}
         </TeamsListContainer>

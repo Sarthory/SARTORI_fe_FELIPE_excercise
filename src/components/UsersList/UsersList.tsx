@@ -1,14 +1,16 @@
 import React from 'react';
-import {useGlobalContext} from 'context/GlobalContext';
-import UserCard from 'components/UserCard/UserCard';
+import {UserData} from 'types';
+import UserCard from 'components/UsersList/UserCard/UserCard';
 import {UsersListContainer} from './usersListStyles';
 
-const UsersList = () => {
-    const {selectedTeamData} = useGlobalContext();
+interface Props {
+    teamMemberData: UserData[];
+}
 
+const UsersList = ({teamMemberData}: Props) => {
     return (
         <UsersListContainer>
-            {selectedTeamData?.teamMemberData.map(user => {
+            {teamMemberData?.map(user => {
                 return <UserCard key={user.id} {...user} />;
             })}
         </UsersListContainer>

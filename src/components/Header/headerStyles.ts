@@ -14,6 +14,7 @@ export const Title = styled.h1`
     flex: 1;
     text-align: center;
     color: #444;
+    margin-right: -185px;
 `;
 
 export const BackButton = styled.div`
