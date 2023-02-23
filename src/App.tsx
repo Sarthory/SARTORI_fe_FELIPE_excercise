@@ -1,25 +1,31 @@
-import * as React from 'react';
+import React from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import TeamOverview from './pages/TeamOverview';
-import Teams from './pages/Teams';
-import UserOverview from './pages/UserOverview';
+
+import GlobalContextProvider from 'context/GlobalContext';
+import Home from 'pages/Home/Home';
+import TeamOverview from './pages/TeamOverview/TeamOverview';
 
 const App = () => {
     var router = createBrowserRouter([
         {
-            path: '/',
-            element: <Teams />,
+            path: '*',
+            element: <Home />,
         },
         {
-            path: '/team/:teamId',
+            path: '/',
+            element: <Home />,
+        },
+        {
+            path: '/teamOverview',
             element: <TeamOverview />,
         },
-        {
-            path: '/user/:useId',
-            element: <UserOverview />,
-        },
     ]);
-    return <RouterProvider router={router} />;
+
+    return (
+        <GlobalContextProvider>
+            <RouterProvider router={router} />
+        </GlobalContextProvider>
+    );
 };
 
 export default App;
