@@ -6,7 +6,7 @@
 ### The main aim of great part of refactoring made were to clean code and easy reading of components code for better understanding to everyone that needs to continue the implementations
 ### A .editorconfig file was added to improve the standardization of the project in different environments
 ### A global context was implemented to improve the exchange of information between components and pages, improving performance without the need to pass IDs by query params
-### The look and feel of the interface was imporved
+### The look and feel of the interface was improved
 
 <br/>
 
@@ -46,7 +46,7 @@ serve -s build
 
 <br/>
 
-## To run the tests yo must run
+## To run the tests you must run
 
 ```
 npm run test
